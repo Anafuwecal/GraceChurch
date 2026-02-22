@@ -1,3 +1,4 @@
+// src/types/index.ts
 export interface Event {
   id: string;
   title: string;
@@ -6,7 +7,7 @@ export interface Event {
   location: string;
   description: string;
   image: string;
-  category: 'worship' | 'youth' | 'outreach' | 'conference' | 'prayer';
+  category: 'worship' | 'youth' | 'outreach' | 'prayer' | 'conference';
   registrationRequired: boolean;
   maxAttendees?: number;
   currentAttendees?: number;
@@ -69,12 +70,6 @@ export interface ContactForm {
   subject: string;
   message: string;
   preferredContact: 'email' | 'phone';
-}
-
-export interface NewsletterSubscription {
-  email: string;
-  firstName?: string;
-  interests: string[];
 }
 
 export interface VerseOfDay {

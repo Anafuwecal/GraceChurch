@@ -1,4 +1,4 @@
-import { ref, onMounted } from 'vue'
+import { ref } from 'vue'
 
 export function useCounter(endValue: number, duration: number = 2000) {
   const currentValue = ref(0)
@@ -15,7 +15,6 @@ export function useCounter(endValue: number, duration: number = 2000) {
       const elapsed = Date.now() - startTime
       const progress = Math.min(elapsed / duration, 1)
       
-      // Easing function for smooth animation
       const easeOutQuart = 1 - Math.pow(1 - progress, 4)
       currentValue.value = Math.floor(startValue + (endValue - startValue) * easeOutQuart)
 

@@ -6,13 +6,15 @@ export function useScrollReveal() {
     rootMargin: '0px 0px -50px 0px'
   }
 
-  let observer: IntersectionObserver
+  let observer: IntersectionObserver | null = null
 
   const handleIntersection = (entries: IntersectionObserverEntry[]) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('animate-fade-in-up')
-        observer.unobserve(entry.target)
+        if (observer) {
+          observer.unobserve(entry.target)
+        }
       }
     })
   }
@@ -20,9 +22,12 @@ export function useScrollReveal() {
   onMounted(() => {
     observer = new IntersectionObserver(handleIntersection, observerOptions)
     
-    // Observe all elements with reveal classes
     const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-up')
-    revealElements.forEach(el => observer.observe(el))
+    revealElements.forEach(el => {
+      if (observer) {
+        observer.observe(el)
+      }
+    })
   })
 
   onUnmounted(() => {

@@ -11,9 +11,12 @@ export function useIntersectionObserver(
   onMounted(() => {
     if (target.value) {
       observer = new IntersectionObserver(
-        ([entry]) => {
-          isIntersecting.value = entry.isIntersecting
-          callback(entry.isIntersecting)
+        (entries) => {
+          const entry = entries[0]
+          if (entry) {
+            isIntersecting.value = entry.isIntersecting
+            callback(entry.isIntersecting)
+          }
         },
         {
           threshold: 0.1,
